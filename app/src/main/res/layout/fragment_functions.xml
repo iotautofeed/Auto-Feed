@@ -12,15 +12,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="404dp"
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSet_Time"
-            android:layout_width="340dp"
-            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
 
             android:clickable="true"
@@ -28,22 +28,26 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
                 <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="Set Feeding time"
                     android:textColor="@color/black"
                     android:textSize="21sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/tvPortion"
@@ -51,59 +55,74 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/tvTime"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
                     android:text="Portion "
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.061"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:layout_constraintVertical_bias="0.612" />
 
                 <Spinner
                     android:id="@+id/spinner1"
-                    android:layout_width="160dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="120dp"
-                    android:gravity="right" />
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="right"
+                    app:layout_constraintBottom_toTopOf="@+id/view7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.963"
+                    app:layout_constraintStart_toEndOf="@+id/tvPortion"
+                    app:layout_constraintTop_toBottomOf="@+id/switchButton"
+                    app:layout_constraintVertical_bias="0.27" />
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.402" />
 
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/tvFeedTime"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Time"
+                    android:layout_marginTop="28dp"
+                    android:text="Start at"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.056"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPortion" />
 
                 <TextView
-                    android:id="@+id/tvFeedTime"
+                    android:id="@+id/tvFeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
                     android:text="Feed every"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="right" />
-
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.056"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTime"
+                    app:layout_constraintVertical_bias="0.651" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchButton"
@@ -111,17 +130,110 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="210dp"
-                    android:layout_marginTop="-30dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="201dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
                     android:textOff="OFF"
                     android:textOn="ON"
+                    android:saveEnabled="true"
                     android:textSize="15sp"
                     android:thumb="@drawable/sw_thumb"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:showText="true"
                     app:track="@drawable/sw_track" />
-            </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view7"
+                    app:layout_constraintVertical_bias="0.324" />
+
+                <TextView
+                    android:id="@+id/tvSetTime"
+                    android:layout_width="160dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:text="set time"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tvTime"
+                    app:layout_constraintTop_toBottomOf="@+id/switchButton"
+                    app:layout_constraintVertical_bias="0.871" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="40dp"
+                    android:gravity="right"
+                    app:layout_constraintBottom_toTopOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.889"
+                    app:layout_constraintStart_toEndOf="@+id/tvFeed"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSetTime" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view6"
+                    app:layout_constraintVertical_bias="0.505" />
+
+                <TextView
+                    android:id="@+id/tvTime1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="End at"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.077"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintVertical_bias="0.418" />
+
+                <TextView
+                    android:id="@+id/tvSetTime1"
+                    android:layout_width="160dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="set time"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tvTime1"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintVertical_bias="0.703" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
 
@@ -136,7 +248,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvFeed_Now"
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_margin="10dp"
 
