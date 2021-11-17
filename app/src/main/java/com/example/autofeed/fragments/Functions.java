@@ -13,14 +13,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.autofeed.R;
 import com.example.autofeed.classes.FeedTime;
+import com.example.autofeed.classes.PetInfo;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -28,6 +33,7 @@ import java.util.Objects;
 
 public class Functions extends Fragment {
 
+    private static final String TAG = "TAG";
     private Spinner spinner1, spinner2, spinner3;
     private SwitchCompat swOn_Off;
     private TextView setStartTime, setEndTime;
@@ -51,6 +57,7 @@ public class Functions extends Fragment {
                 (Objects.requireNonNull(auth.getCurrentUser()).getEmail())
         )).child(("Feed Time"));
 
+        readFireBase();
 
         spinner1 = view.findViewById(R.id.spinner1);
         spinner2 = view.findViewById(R.id.spinner2);
@@ -62,9 +69,10 @@ public class Functions extends Fragment {
         spinner1.setEnabled(false);
         spinner2.setEnabled(false);
 
+        initspinnerfooter();
+
         swOn_Off.setOnClickListener(v -> setSwitch());
 
-        initspinnerfooter();
 
         return view;
     }
@@ -89,26 +97,26 @@ public class Functions extends Fragment {
     private void setSwitch() {
 
         if (swOn_Off.isChecked()) {
-            reference.child("TIMER").setValue("true");
             spinner1.setEnabled(true);
             spinner2.setEnabled(true);
             setStartTime.setEnabled(true);
             setEndTime.setEnabled(true);
+            reference.child("Timer").setValue("true");
             setStartTime.setOnClickListener(v -> setFeedTime(setStartTime));
             setEndTime.setOnClickListener(v -> setFeedTime(setEndTime));
         } else {
-            reference.child("TIMER").setValue("false");
             spinner1.setEnabled(false);
             spinner2.setEnabled(false);
             setStartTime.setEnabled(false);
             setEndTime.setEnabled(false);
+            reference.child("Timer").setValue("false");
 
         }
     }
 
     private void initspinnerfooter() {
         String[] values =
-                {"select","100 grams", "150 grams", "200 grams", "250 grams", "300 grams", "350 grams"};
+                {"select", "100 grams", "150 grams", "200 grams", "250 grams", "300 grams", "350 grams"};
         String[] time =
                 {"select", "1 hour", "2 hours", "3 hours", "3 hours", "4 hours", "5 hours"};
 
@@ -124,10 +132,8 @@ public class Functions extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.v("item", (String) parent.getItemAtPosition(position));
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                if (position == 0)
-                    reference.child("Every").setValue("None");
-                else
-                    reference.child("Portion").setValue(parent.getItemAtPosition(position));
+                reference.child("Portion").setValue(position);
+
             }
 
             @Override
@@ -140,10 +146,7 @@ public class Functions extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.v("item", (String) parent.getItemAtPosition(position));
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                if (position == 0)
-                    reference.child("Every").setValue("None");
-                else
-                    reference.child("Every").setValue(parent.getItemAtPosition(position));
+                reference.child("Every").setValue(position);
             }
 
             @Override
@@ -177,5 +180,45 @@ public class Functions extends Fragment {
             reference.child("End").setValue(feedTime);
     }
 
-    
+    private void readFireBase() {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                FeedTime feedTime1 = dataSnapshot.child("Start").getValue(FeedTime.class);
+                FeedTime feedTime2 = dataSnapshot.child("End").getValue(FeedTime.class);
+
+                FeedTime feedTime1Temp = new FeedTime();
+                FeedTime feedTime2Temp = new FeedTime();
+
+                String swTimer = (String) dataSnapshot.child("Timer").getValue();
+                String portion = String.valueOf((dataSnapshot.child("Portion").getValue()));
+                String foodEvery = String.valueOf(dataSnapshot.child("Every").getValue());
+
+                if (feedTime1 != null) {
+                    setStartTime.setText(String.format("%02d : %02d", feedTime1.getHour(), feedTime1.getMinute()));
+                } else {
+                    setStartTime.setText(String.format("%02d : %02d", feedTime1Temp.getHour(), feedTime1Temp.getMinute()));
+                }
+
+                if (feedTime2 != null) {
+                    setEndTime.setText(String.format("%02d : %02d", feedTime2.getHour(), feedTime2.getMinute()));
+                } else {
+                    setEndTime.setText(String.format("%02d : %02d", feedTime2Temp.getHour(), feedTime2Temp.getMinute()));
+                }
+
+                if (swTimer != null) {
+                    swOn_Off.setChecked(swTimer.equals("true"));
+                    setSwitch();
+                }
+                spinner1.setSelection(Integer.parseInt(portion));
+                spinner2.setSelection(Integer.parseInt(foodEvery));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
 }

@@ -96,7 +96,7 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
-                        makeText(Login.this, "Login Succesaful", Toast.LENGTH_SHORT).show();
+                       // makeText(Login.this, "Login Succesaful", Toast.LENGTH_SHORT).show();
 
                         //pass user name for later use
                         readFireBase(userEmail);
@@ -121,7 +121,7 @@ public class Login extends AppCompatActivity {
                 // whenever data at this location is updated.
                 //String name = Objects.requireNonNull(dataSnapshot.child(username).child("email").getValue()).toString();
                 String name = Objects.requireNonNull(dataSnapshot.child(encodeUserEmail(username)).child("User Info").child("name").getValue()).toString();
-                makeText(Login.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
+                //makeText(Login.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Value is: " + name);
             }
 
