@@ -1,5 +1,7 @@
 package com.example.autofeed.fragments;
 
+import static java.lang.String.format;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -85,10 +87,10 @@ public class Functions extends Fragment {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
                 (view1, hour1, minute1) -> {
                     if (view == setStartTime) {
-                        saveDateFireBase(new FeedTime(hour1, minute1, 0));
+                        saveDateFireBase(new FeedTime(String.valueOf(hour1), String.valueOf(minute1), 0 + ""));
                     } else
-                        saveDateFireBase(new FeedTime(hour1, minute1, 1));
-                    view.setText(String.format("%02d : %02d", hour1, minute1));
+                        saveDateFireBase(new FeedTime(String.valueOf(hour1), String.valueOf(minute1), 1 + ""));
+                    view.setText(format("%02d : %02d", hour1, minute1));
                 },
                 hour, minute, android.text.format.DateFormat.is24HourFormat(getActivity()));
         timePickerDialog.show();
@@ -118,7 +120,7 @@ public class Functions extends Fragment {
         String[] values =
                 {"select", "100 grams", "150 grams", "200 grams", "250 grams", "300 grams", "350 grams"};
         String[] time =
-                {"select", "1 hour", "2 hours", "3 hours", "3 hours", "4 hours", "5 hours"};
+                {"select", "1 hour", "2 hours", "3 hours", "4 hours", "5 hours"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, values);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, time);
@@ -132,7 +134,7 @@ public class Functions extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.v("item", (String) parent.getItemAtPosition(position));
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                reference.child("Portion").setValue(position);
+                reference.child("Portion").setValue(String.valueOf(position));
 
             }
 
@@ -146,7 +148,7 @@ public class Functions extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.v("item", (String) parent.getItemAtPosition(position));
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                reference.child("Every").setValue(position);
+                reference.child("Every").setValue(String.valueOf(position));
             }
 
             @Override
@@ -174,7 +176,7 @@ public class Functions extends Fragment {
     }
 
     private void saveDateFireBase(FeedTime feedTime) {
-        if ((feedTime.getState() == 0)) {
+        if ((feedTime.getState().equals("0"))) {
             reference.child("Start").setValue(feedTime);
         } else
             reference.child("End").setValue(feedTime);
@@ -191,28 +193,35 @@ public class Functions extends Fragment {
                 FeedTime feedTime2Temp = new FeedTime();
 
                 String swTimer = (String) dataSnapshot.child("Timer").getValue();
-                String portion = String.valueOf((dataSnapshot.child("Portion").getValue()));
-                String foodEvery = String.valueOf(dataSnapshot.child("Every").getValue());
+                String portion = (String) dataSnapshot.child("Portion").getValue();
+                String foodEvery = (String) dataSnapshot.child("Every").getValue();
 
                 if (feedTime1 != null) {
-                    setStartTime.setText(String.format("%02d : %02d", feedTime1.getHour(), feedTime1.getMinute()));
+                    setStartTime.setText(format("%02d : %02d", Integer.parseInt(feedTime1.getHour()), Integer.parseInt(feedTime1.getMinute())));
                 } else {
-                    setStartTime.setText(String.format("%02d : %02d", feedTime1Temp.getHour(), feedTime1Temp.getMinute()));
+                    setStartTime.setText(format("%02d : %02d", Integer.parseInt(feedTime1Temp.getHour()), Integer.parseInt(feedTime1Temp.getMinute())));
                 }
 
                 if (feedTime2 != null) {
-                    setEndTime.setText(String.format("%02d : %02d", feedTime2.getHour(), feedTime2.getMinute()));
+                    setEndTime.setText(format("%02d : %02d", Integer.parseInt(feedTime2.getHour()), Integer.parseInt(feedTime2.getMinute())));
                 } else {
-                    setEndTime.setText(String.format("%02d : %02d", feedTime2Temp.getHour(), feedTime2Temp.getMinute()));
+                    setEndTime.setText(format("%02d : %02d", Integer.parseInt(feedTime2Temp.getHour()), Integer.parseInt(feedTime2Temp.getMinute())));
                 }
 
                 if (swTimer != null) {
                     swOn_Off.setChecked(swTimer.equals("true"));
-                    setSwitch();
+                } else {
+                    swOn_Off.setChecked(false);
                 }
-                spinner1.setSelection(Integer.parseInt(portion));
-                spinner2.setSelection(Integer.parseInt(foodEvery));
-
+                setSwitch();
+                if (portion != null)
+                    spinner1.setSelection(Integer.parseInt(portion));
+                else
+                    spinner1.setSelection(0);
+                if (foodEvery != null)
+                    spinner2.setSelection(Integer.parseInt(foodEvery));
+                else
+                    spinner2.setSelection(0);
             }
 
             @Override
