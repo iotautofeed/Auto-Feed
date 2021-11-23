@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.autofeed.R;
+import com.example.autofeed.fragments.Home;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -110,7 +111,6 @@ public class Login extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void readFireBase(String username) {
         reference = FirebaseDatabase.getInstance().getReference().child("Users");

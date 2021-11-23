@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4EFEF"
+    android:background="@drawable/background1"
     android:orientation="vertical"
     android:padding="10dp"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -70,7 +70,7 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/circle_background_yellow"
+                    android:background="@drawable/circle_background_purple"
                     android:src="@drawable/ic_baseline_person_24"></ImageView>
 
                 <TextView
@@ -146,7 +146,7 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/circle_background_purple"
+                    android:background="@drawable/circle_background_yellow"
                     android:src="@drawable/ic_outline_pets_24"></ImageView>
 
                 <TextView

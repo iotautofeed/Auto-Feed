@@ -122,14 +122,14 @@ public class PetProfile extends AppCompatActivity {
                     editType.setText(petInfo.getType());
                     editBreed.setText(petInfo.getBreed());
                     editGender.setText(petInfo.getGender());
-                    editWeight.setText(petInfo.getWeight());
+                    editWeight.setText(petInfo.getWeight() + " kgs");
                 } else {
                     PetInfo petInfoTemp = new PetInfo();
                     editName.setText(petInfoTemp.getName());
                     editType.setText(petInfoTemp.getType());
                     editBreed.setText(petInfoTemp.getBreed());
                     editGender.setText(petInfoTemp.getGender());
-                    editWeight.setText(petInfoTemp.getWeight());
+                    editWeight.setText(petInfoTemp.getWeight() + " kgs");
                 }
             }
 

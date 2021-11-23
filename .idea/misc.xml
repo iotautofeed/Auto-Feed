@@ -45,16 +45,28 @@
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed/app/src/main/res/layout/fragment_logs.xml" value="0.6" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed/app/src/main/res/layout/fragment_settings.xml" value="0.4" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed/app/src/main/res/layout/tenp.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/background1.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/btn_dark.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/btn_light.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/button.xml" value="0.2703125" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.2703125" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/pet_info_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/progress_bar.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/progress_bar_green.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/progress_bar_lightgreen.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/progress_bar_orange.xml" value="0.2703125" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/drawable/progress_bar_red.xml" value="0.2703125" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_edit_pet_profile.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_login.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_main_page.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_new_user.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_pet_profile.xml" value="0.536" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_pet_profile.xml" value="0.264" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/activity_user_info.xml" value="0.264" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_functions.xml" value="0.264" />
-        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_home.xml" value="0.18611111111111112" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_guide.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_home.xml" value="0.46537059538274606" />
+        <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_logs.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/sagio/AndroidStudioProjects/AutoFeed2/app/src/main/res/layout/fragment_settings.xml" value="0.20277777777777778" />
       </map>
     </option>

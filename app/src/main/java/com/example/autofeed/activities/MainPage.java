@@ -41,11 +41,12 @@ public class MainPage extends AppCompatActivity {
 
         vpAdapter = new VPAdaptor(getSupportFragmentManager(), getLifecycle());
         //Add Fragments
-        vpAdapter.addFragment(new Guide());     //0
-        vpAdapter.addFragment(new Logs());      //1
-        vpAdapter.addFragment(new Home());      //2
-        vpAdapter.addFragment(new Functions()); //3
-        vpAdapter.addFragment(new Settings());  //4
+        vpAdapter.addFragment(new Home());
+        vpAdapter.addFragment(new Functions());
+        vpAdapter.addFragment(new Logs());
+        vpAdapter.addFragment(new Settings());
+        vpAdapter.addFragment(new Guide());
+
 
         viewPager2.setAdapter(vpAdapter);
 
@@ -54,19 +55,22 @@ public class MainPage extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
                     case 0:
-                        tab.setIcon(R.drawable.ic_baseline_help_outline_24);
-                        break;
-                    case 1:
-                        tab.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
-                        break;
-                    case 2:
                         tab.setIcon(R.drawable.ic_baseline_home_24);
                         break;
-                    case 3:
+                    case 1:
                         tab.setIcon(R.drawable.ic_baseline_dog_bowl_24);
                         break;
-                    case 4 :
+                    case 2:
+                        tab.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
+
+                        break;
+                    case 3:
                         tab.setIcon(R.drawable.ic_baseline_settings_24);
+
+                        break;
+                    case 4 :
+                        tab.setIcon(R.drawable.ic_baseline_help_outline_24);
+
                     }
             }
         }).attach();
