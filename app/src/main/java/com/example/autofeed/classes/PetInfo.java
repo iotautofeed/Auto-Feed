@@ -1,14 +1,15 @@
 package com.example.autofeed.classes;
 
 public class PetInfo {
-    private String name, type, breed, gender, weight;
+    private String name, type, breed, gender, weight, id;
 
-    public PetInfo(String name, String type, String breed, String gender, String weight) {
+    public PetInfo(String name, String type, String breed, String gender, String weight, String id) {
         this.name = name;
         this.type = type;
         this.breed = breed;
         this.gender = gender;
         this.weight = weight;
+        this.id = id;
     }
 
     public PetInfo(){
@@ -17,6 +18,7 @@ public class PetInfo {
         this.setBreed("Breed");
         this.setGender("Gender");
         this.setWeight("kg");
+        this.setId("id");
 
     }
 
@@ -60,4 +62,11 @@ public class PetInfo {
         this.weight = weight;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

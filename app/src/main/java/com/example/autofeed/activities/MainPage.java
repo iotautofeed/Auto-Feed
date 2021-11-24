@@ -47,32 +47,28 @@ public class MainPage extends AppCompatActivity {
         vpAdapter.addFragment(new Settings());
         vpAdapter.addFragment(new Guide());
 
-
         viewPager2.setAdapter(vpAdapter);
 
-        new TabLayoutMediator(mTabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position) {
-                    case 0:
-                        tab.setIcon(R.drawable.ic_baseline_home_24);
-                        break;
-                    case 1:
-                        tab.setIcon(R.drawable.ic_baseline_dog_bowl_24);
-                        break;
-                    case 2:
-                        tab.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
+        new TabLayoutMediator(mTabLayout, viewPager2, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setIcon(R.drawable.ic_baseline_home_24);
+                    break;
+                case 1:
+                    tab.setIcon(R.drawable.ic_baseline_dog_bowl_24);
+                    break;
+                case 2:
+                    tab.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
 
-                        break;
-                    case 3:
-                        tab.setIcon(R.drawable.ic_baseline_settings_24);
+                    break;
+                case 3:
+                    tab.setIcon(R.drawable.ic_baseline_settings_24);
 
-                        break;
-                    case 4 :
-                        tab.setIcon(R.drawable.ic_baseline_help_outline_24);
+                    break;
+                case 4 :
+                    tab.setIcon(R.drawable.ic_baseline_help_outline_24);
 
-                    }
-            }
+                }
         }).attach();
 
     }

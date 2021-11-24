@@ -54,7 +54,8 @@ public class EditPetProfile extends AppCompatActivity {
     private CircleImageView petImage;
     private TextInputEditText name, type, breed, gender, weight;
     private FloatingActionButton confirm;
-    private String updateName, updateType, updateBreed, updateGender, updateWeight, ActivityKey;
+    private String updateName, updateType, updateBreed, updateGender, updateWeight, id;
+    private String isNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +64,17 @@ public class EditPetProfile extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_edit_pet_profile);
+        Intent intent = getIntent();
+        isNew = intent.getStringExtra("new");
+        id = intent.getStringExtra("id");
+        Log.d(TAG,isNew + " " + id);
 
         setVariables();
 
         auth = FirebaseAuth.getInstance();
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Users").child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).child(("Pet Info"));
+        reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail())));
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
@@ -99,35 +105,17 @@ public class EditPetProfile extends AppCompatActivity {
         updateGender = Objects.requireNonNull(gender.getText()).toString().trim();
         updateWeight = Objects.requireNonNull(weight.getText()).toString().trim();
         if (check()) {
-            PetInfo petInfo = new PetInfo(updateName, updateType, updateBreed, updateGender, updateWeight);
+            PetInfo petInfo = new PetInfo(updateName, updateType, updateBreed, updateGender, updateWeight, id);
 
             saveDateFireBase(petInfo);
-
             Intent intent = new Intent(EditPetProfile.this, PetProfile.class);
             startActivity(intent);
             finish();
         }
     }
 
-
-//    private void setImage() {
-//        Intent intent = new Intent(Intent.ACTION_PICK,
-//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        startActivityForResult(intent, RESULT_LOAD_IMAGE);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK && null != data) {
-//            Uri selectedImage = data.getData();
-//            petImage1.setImageURI(selectedImage);
-//        }
-//    }
-
     private void setVariables() {
         petImage = findViewById(R.id.civPetImg);
-//        petImage1 = findViewById(R.id.ivImage);
         name = findViewById(R.id.etPet_Name);
         type = findViewById(R.id.etPet_Type);
         breed = findViewById(R.id.etPet_Breed);
@@ -137,7 +125,10 @@ public class EditPetProfile extends AppCompatActivity {
     }
 
     private void saveDateFireBase(PetInfo petInfo) {
-        reference.setValue(petInfo);
+        if(isNew.equals("true"))
+            petInfo.setId(FirebaseDatabase.getInstance().getReference().push().getKey());
+        Log.d(TAG, petInfo.getId());
+        reference.child(petInfo.getId()).setValue(petInfo);
     }
 
     static String encodeUserEmail(String userEmail) {
@@ -176,16 +167,6 @@ public class EditPetProfile extends AppCompatActivity {
         builder.create();
         builder.show();
     }
-//
-//    public void handleImageUpload() {
-//
-////        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-////        if (intent.resolveActivity(getPackageManager()) != null) {
-////            startActivityForResult(intent, TAKE_IMAGE_CODE);
-////        }
-//        Intent gallery = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.);
-//        startActivityForResult(gallery, TAKE_IMAGE_CODE);
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

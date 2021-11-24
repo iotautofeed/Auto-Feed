@@ -22,16 +22,48 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civPetImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="120dp"
+        android:elevation="5dp"
+        android:src="@drawable/dog"
+        app:civ_border_color="@color/lightGray"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_margin="30dp"
+        android:backgroundTint="#01F1D9"
+        android:contentDescription="add pet"
+        android:src="@drawable/ic_baseline_add_24"
+        app:elevation="10dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="350dp"
-        android:layout_height="534dp"
+        android:layout_width="330dp"
+        android:layout_height="530dp"
         android:background="@drawable/pet_info_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685">
+        app:layout_constraintVertical_bias="0.659">
 
         <TextView
             android:id="@+id/tvPetName"
@@ -163,7 +195,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toEndOf="@+id/tvPet_Type"
             app:layout_constraintTop_toBottomOf="@+id/view1"
             app:layout_constraintVertical_bias="0.0" />
@@ -172,8 +204,8 @@
             android:id="@+id/tvEdit_Pet_Breed"
             android:layout_width="210dp"
             android:layout_height="29dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="28dp"
             android:gravity="right"
             android:text="Breed"
             android:textSize="18sp"
@@ -184,13 +216,13 @@
             android:id="@+id/tvEdit_Pet_Gender"
             android:layout_width="210dp"
             android:layout_height="29dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="40dp"
             android:gravity="right"
             android:text="Gender"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/view4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.885"
+            app:layout_constraintHorizontal_bias="0.733"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -203,23 +235,10 @@
             android:text="Weight"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/tvPet_Weight"
             app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civPetImg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="120dp"
-        android:elevation="5dp"
-        android:src="@drawable/dog"
-        app:civ_border_color="@color/lightGray"
-        app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

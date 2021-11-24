@@ -188,7 +188,7 @@ public class Home extends Fragment {
         progressBar.setProgress(0);
         progressBar.setMax(max);
         progressBar.setProgress(0);
-        final int[] day = {0};
+
         List<String> list = new ArrayList<>();
         DatabaseReference graphReference = FirebaseDatabase.getInstance().getReference().child("FoodPerDay");
 

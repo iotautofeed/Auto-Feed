@@ -10,6 +10,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".activities.AddPet"
+            android:exported="false" />
+        <activity
             android:name=".activities.UserInfo"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
