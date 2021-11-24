@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -70,37 +71,33 @@ public class Home extends Fragment {
         bowlStatus = view.findViewById(R.id.tvBowlStatus);
         containerStatus = view.findViewById(R.id.tvContainerStatus);
 
-        progressBar1.setMax(100);
-        progressBar.setProgress(0);
-        progressBar.setMax(max);
-        progressBar.setProgress(0);
-
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Users").
                 child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser())
                         .getEmail())));
         readFireBase();
         setPetImage();
+        setGraph();
+//
+//        ArrayList<BarEntry> food = new ArrayList<>();
+//        food.add(new BarEntry(1, 100));
+//        food.add(new BarEntry(2, 200));
+//        food.add(new BarEntry(3, 300));
+//        food.add(new BarEntry(4, 400));
+//        food.add(new BarEntry(5, 300));
+//        food.add(new BarEntry(6, 250));
 
-        ArrayList<BarEntry> food = new ArrayList<>();
-        food.add(new BarEntry(1, 100));
-        food.add(new BarEntry(2, 200));
-        food.add(new BarEntry(3, 300));
-        food.add(new BarEntry(4, 400));
-        food.add(new BarEntry(5, 300));
-        food.add(new BarEntry(6, 250));
-
-        barDataSet = new BarDataSet(food, "Food");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(14f);
-
-        barData = new BarData(barDataSet);
-
-        barChart.setFitBars(true);
-        barChart.setData(barData);
-        barChart.getDescription().setText("Bar Chart");
-        barChart.animateY(1000);
+//        barDataSet = new BarDataSet(food, "Food");
+//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//        barDataSet.setValueTextColor(Color.BLACK);
+//        barDataSet.setValueTextSize(14f);
+//
+//        barData = new BarData(barDataSet);
+//
+//        barChart.setFitBars(true);
+//        barChart.setData(barData);
+//        barChart.getDescription().setText("Bar Chart");
+//        barChart.animateY(1000);
 
         return view;
 
@@ -184,5 +181,55 @@ public class Home extends Fragment {
                     .load(user.getPhotoUrl())
                     .into(petImage);
         }
+    }
+
+    private void setGraph() {
+        progressBar1.setMax(100);
+        progressBar.setProgress(0);
+        progressBar.setMax(max);
+        progressBar.setProgress(0);
+        final int[] day = {0};
+        List<String> list = new ArrayList<>();
+        DatabaseReference graphReference = FirebaseDatabase.getInstance().getReference().child("FoodPerDay");
+
+        graphReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String food = ds.getValue(String.class);
+                        if (food != null) {
+                            list.add(food);
+                            Log.d("Got value" + food, TAG);
+
+                        }
+                    }
+                }
+                ArrayList<BarEntry> data = new ArrayList<>();
+
+                for (int i = 0; i < list.size(); i++) {
+                    data.add(new BarEntry(i, Integer.parseInt((list.get(i)))));
+                    Log.d("Got value " + list.get(i), TAG);
+
+                }
+                barDataSet = new BarDataSet(data, "Food");
+                barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                barDataSet.setValueTextColor(Color.BLACK);
+                barDataSet.setValueTextSize(14f);
+
+                barData = new BarData(barDataSet);
+
+                barChart.setFitBars(true);
+                barChart.setData(barData);
+                barChart.getDescription().setText("Bar Chart");
+                barChart.animateY(1000);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Failed", TAG);
+
+            }
+        });
     }
 }
