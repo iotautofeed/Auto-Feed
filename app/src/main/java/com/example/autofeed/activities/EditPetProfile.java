@@ -49,7 +49,7 @@ public class EditPetProfile extends AppCompatActivity {
 
     private FirebaseAuth auth;          //authentication
     private FirebaseDatabase rootNode;  //real time database
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference1;
 
     private CircleImageView petImage;
     private TextInputEditText name, type, breed, gender, weight;
@@ -74,15 +74,15 @@ public class EditPetProfile extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         rootNode = FirebaseDatabase.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail())));
-
+        reference1 = FirebaseDatabase.getInstance().getReference().child("Pets").child("Current Pet");
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .into(petImage);
-        }
+//        if (user.getPhotoUrl() != null) {
+//            Glide.with(this)
+//                    .load(user.getPhotoUrl())
+//                    .into(petImage);
+//        }
         petImage.setOnClickListener(view -> addPetImage());
         confirm.setOnClickListener(view -> updateProfile());
     }
@@ -126,9 +126,10 @@ public class EditPetProfile extends AppCompatActivity {
 
     private void saveDateFireBase(PetInfo petInfo) {
         if(isNew.equals("true"))
-            petInfo.setId(FirebaseDatabase.getInstance().getReference().push().getKey());
+            petInfo.setId(id);
         Log.d(TAG, petInfo.getId());
         reference.child(petInfo.getId()).setValue(petInfo);
+        reference1.setValue(id);
     }
 
     static String encodeUserEmail(String userEmail) {
