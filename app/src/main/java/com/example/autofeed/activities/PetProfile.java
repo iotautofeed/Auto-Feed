@@ -1,5 +1,6 @@
 package com.example.autofeed.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.autofeed.R;
 import com.example.autofeed.classes.PetInfo;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.github.sealstudios.fab.FloatingActionButton;
+import com.github.sealstudios.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +34,11 @@ public class PetProfile extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final String TAG = "TAG";
     private CircleImageView petImage;
-    private FloatingActionButton addPet;
     private TextView editButton, editName, editType, editBreed, editGender, editWeight;
-    private List<String> pets;
+    private List<String> pets, petsName;
     private String currentPet;
+    private FloatingActionButton editPet, changePet, addPet;
+    private FloatingActionMenu fabMenu;
 
     private FirebaseAuth auth;          //authentication
     private DatabaseReference reference;
@@ -57,8 +60,62 @@ public class PetProfile extends AppCompatActivity {
         setPetImage();
 
         addPet.setOnClickListener(view -> editDetails());
-        editButton.setOnClickListener(view -> editDetails());
+        editPet.setOnClickListener(view -> editDetails());
+        changePet.setOnClickListener(view -> selectPet());
 
+    }
+
+    private void selectPet() {
+        // makeText(this, "select pet", Toast.LENGTH_SHORT).show();
+        showAlertDialog();
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PetProfile.this);
+        alertDialog.setTitle("Select Pet");
+        String[] items = petsName.toArray(new String[0]);
+        final int[] checkedItem = {-1};
+        alertDialog.setSingleChoiceItems(items, checkedItem[0], (dialog, which) -> {
+            checkedItem[0] = which;
+            Log.d(TAG, String.valueOf(checkedItem[0]));
+        });
+
+        alertDialog.setPositiveButton("Confirm", (dialog, which) -> {
+            if (checkedItem[0] != -1)
+                setPetProfile(checkedItem[0]);
+        });
+        alertDialog.setNegativeButton("Cancel", (dialog, which) -> Log.d(TAG, "simpleAlert: canceled"));
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+    }
+
+    private void setPetProfile(int changePet) {
+        reference.child("Current Pet").setValue(String.valueOf(changePet));
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PetInfo petInfo = snapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).child(String.valueOf(changePet)).getValue(PetInfo.class);
+                if (petInfo != null) {
+                    editName.setText(petInfo.getName());
+                    editType.setText(petInfo.getType());
+                    editBreed.setText(petInfo.getBreed());
+                    editGender.setText(petInfo.getGender());
+                    editWeight.setText(petInfo.getWeight() + " kgs");
+                } else {
+                    PetInfo petInfoTemp = new PetInfo();
+                    editName.setText(petInfoTemp.getName());
+                    editType.setText(petInfoTemp.getType());
+                    editBreed.setText(petInfoTemp.getBreed());
+                    editGender.setText(petInfoTemp.getGender());
+                    editWeight.setText(petInfoTemp.getWeight() + " kgs");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void setVariables() {
@@ -70,6 +127,9 @@ public class PetProfile extends AppCompatActivity {
         editGender = findViewById(R.id.tvEdit_Pet_Gender);
         editWeight = findViewById(R.id.tvEdit_Pet_Weight);
         addPet = findViewById(R.id.fabAddPet);
+        editPet = findViewById(R.id.fabEditPet);
+        changePet = findViewById(R.id.fabChangePet);
+        fabMenu = findViewById(R.id.fabMenu);
 
     }
 
@@ -122,14 +182,16 @@ public class PetProfile extends AppCompatActivity {
     private void readFireBase() {
 
         pets = new ArrayList<>();
-
+        petsName = new ArrayList<>();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 pets.clear();
+                petsName.clear();
                 for (DataSnapshot ds : dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).getChildren()) {
                     if (ds.exists()) {
                         pets.add(Objects.requireNonNull(ds.child("id").getValue()).toString());
+                        petsName.add(Objects.requireNonNull(ds.child("name").getValue()).toString());
                     }
 //                    } else {
 //                        PetInfo petInfoTemp = new PetInfo("", "", "", "", "", FirebaseDatabase.getInstance().getReference().push().getKey());
@@ -139,13 +201,13 @@ public class PetProfile extends AppCompatActivity {
 //                    }
                 }
                 Log.d(TAG, String.valueOf(pets));
+                Log.d(TAG, String.valueOf(petsName));
 
                 currentPet = dataSnapshot.child("Current Pet").getValue(String.class);
                 if (pets.size() > 0) {
                     Log.d(TAG, currentPet);
                     if (currentPet != null) {
                         PetInfo petInfo = dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).child(pets.get(Integer.parseInt(currentPet))).getValue(PetInfo.class);
-
                         if (petInfo != null) {
                             editName.setText(petInfo.getName());
                             editType.setText(petInfo.getType());
@@ -161,8 +223,7 @@ public class PetProfile extends AppCompatActivity {
                             editWeight.setText(petInfoTemp.getWeight() + " kgs");
                         }
                     }
-                }
-                else{
+                } else {
                     reference.child("Current Pet").setValue("0");
                     {
                         PetInfo petInfoTemp = new PetInfo();

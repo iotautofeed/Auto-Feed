@@ -4,22 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PetProfile"
     android:background="@drawable/background1"
-    >
+    tools:context=".activities.PetProfile">
+
+    <com.github.sealstudios.fab.FloatingActionMenu
+        android:id="@+id/fabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:menu_buttonSpacing="15dp"
+        app:menu_colorNormal="#01F1D9"
+        app:menu_colorPressed="#00A594"
+        app:menu_icon="@drawable/ic_baseline_add_24"
+        app:menu_labels_ellipsize="none"
+        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        app:menu_labels_showAnimation="@anim/fab_slide_in_from_left"
+        app:menu_labels_singleLine="false"
+        app:menu_openDirection="left">
 
 
-    <TextView
-            android:id="@+id/tvEdit"
-            android:layout_width="72dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:text="Edit"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.github.sealstudios.fab.FloatingActionButton
+            android:id="@+id/fabChangePet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="change pet"
+            android:src="@drawable/ic_baseline_change_circle_24"
+            app:elevation="10dp"
+            app:fabSize="normal"
+            app:fab_colorNormal="#01F1D9"
+            app:fab_colorPressed="#00A594">
+
+        </com.github.sealstudios.fab.FloatingActionButton>
+
+        <com.github.sealstudios.fab.FloatingActionButton
+            android:id="@+id/fabEditPet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="edit pet"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:elevation="10dp"
+            app:fabSize="normal"
+            app:fab_colorNormal="#01F1D9"
+            app:fab_colorPressed="#00A594">
+
+        </com.github.sealstudios.fab.FloatingActionButton>
+
+        <com.github.sealstudios.fab.FloatingActionButton
+            android:id="@+id/fabAddPet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="add pet"
+            android:src="@drawable/ic_baseline_add_24"
+            app:elevation="10dp"
+            app:fabSize="normal"
+            app:fab_colorNormal="#01F1D9"
+            app:fab_colorPressed="#00A594">
+
+        </com.github.sealstudios.fab.FloatingActionButton>
+    </com.github.sealstudios.fab.FloatingActionMenu>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -27,32 +74,15 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="120dp"
+        android:clickable="false"
         android:elevation="5dp"
         android:src="@drawable/dog"
         app:civ_border_color="@color/lightGray"
         app:civ_border_width="2dp"
-        android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:layout_margin="30dp"
-        android:backgroundTint="#01F1D9"
-        android:contentDescription="add pet"
-        android:src="@drawable/ic_baseline_add_24"
-        app:elevation="10dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -187,8 +217,8 @@
 
         <TextView
             android:id="@+id/tvEdit_Pet_Type"
-            android:layout_width="201dp"
-            android:layout_height="28dp"
+            android:layout_width="199dp"
+            android:layout_height="42dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="56dp"
             android:gravity="right"
