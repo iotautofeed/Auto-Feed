@@ -57,7 +57,7 @@ public class PetProfile extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child("Pets");
 
         readFireBase();
-        setPetImage();
+       //setPetImage();
 
         addPet.setOnClickListener(view -> editDetails());
         editPet.setOnClickListener(view -> editDetails());
@@ -214,6 +214,9 @@ public class PetProfile extends AppCompatActivity {
                             editBreed.setText(petInfo.getBreed());
                             editGender.setText(petInfo.getGender());
                             editWeight.setText(petInfo.getWeight() + " kgs");
+                            Glide.with(PetProfile.this)
+                                    .load(petInfo.getImageID())
+                                    .into(petImage);
                         } else {
                             PetInfo petInfoTemp = new PetInfo();
                             editName.setText(petInfoTemp.getName());

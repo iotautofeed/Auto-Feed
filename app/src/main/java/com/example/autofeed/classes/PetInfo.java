@@ -1,24 +1,26 @@
 package com.example.autofeed.classes;
 
 public class PetInfo {
-    private String name, type, breed, gender, weight, id;
+    private String name, type, breed, gender, weight, id, imageID;
 
-    public PetInfo(String name, String type, String breed, String gender, String weight, String id) {
+    public PetInfo(String name, String type, String breed, String gender, String weight, String id, String imageID) {
         this.name = name;
         this.type = type;
         this.breed = breed;
         this.gender = gender;
         this.weight = weight;
         this.id = id;
+        this.imageID = imageID;
     }
 
-    public PetInfo(){
+    public PetInfo() {
         this.setName("Name");
         this.setType("Type");
         this.setBreed("Breed");
         this.setGender("Gender");
         this.setWeight("kg");
         this.setId("id");
+        this.setImageID("id");
 
     }
 
@@ -68,5 +70,13 @@ public class PetInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
     }
 }

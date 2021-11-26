@@ -47,7 +47,7 @@ public class EditPetProfile extends AppCompatActivity {
     private CircleImageView petImage;
     private TextInputEditText name, type, breed, gender, weight;
     private FloatingActionButton confirm;
-    private String updateName, updateType, updateBreed, updateGender, updateWeight, id;
+    private String updateName, updateType, updateBreed, updateGender, updateWeight, id, imageId;
     private String isNew;
 
     @Override
@@ -98,7 +98,7 @@ public class EditPetProfile extends AppCompatActivity {
         updateGender = Objects.requireNonNull(gender.getText()).toString().trim();
         updateWeight = Objects.requireNonNull(weight.getText()).toString().trim();
         if (check()) {
-            PetInfo petInfo = new PetInfo(updateName, updateType, updateBreed, updateGender, updateWeight, id);
+            PetInfo petInfo = new PetInfo(updateName, updateType, updateBreed, updateGender, updateWeight, id, imageId);
 
             saveDateFireBase(petInfo);
             Intent intent = new Intent(EditPetProfile.this, PetProfile.class);
@@ -206,6 +206,7 @@ public class EditPetProfile extends AppCompatActivity {
         reference.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     Log.d(TAG, "onSuccess: " + uri);
+                    imageId = String.valueOf(uri);
                     setUserProfileUrl(uri);
                 });
     }
