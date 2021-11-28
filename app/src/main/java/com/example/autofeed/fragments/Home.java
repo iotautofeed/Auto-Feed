@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.autofeed.R;
+import com.example.autofeed.activities.PetProfile;
 import com.example.autofeed.classes.PetInfo;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,15 +48,18 @@ public class Home extends Fragment {
     private static final String TAG = "TAG";
     private final int max = 100;
     private FirebaseAuth auth;          //authentication
-    private FirebaseDatabase rootNode;  //real time database
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference1;
+
+    private List<String> pets;
 
     private CircleImageView petImage;
-    private TextView pet_Name, nextFeedTime, bowlStatus, containerStatus;
+    private TextView petName, nextFeedTime, bowlStatus, containerStatus;
     private BarChart barChart;
     private BarDataSet barDataSet;
     private BarData barData;
     private ProgressBar progressBar, progressBar1;
+    private String currentPet;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +67,7 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        pet_Name = view.findViewById(R.id.tvPetName);
+        petName = view.findViewById(R.id.tvPetName);
         nextFeedTime = view.findViewById(R.id.tvShowNextTime);
         barChart = view.findViewById(R.id.chart);
         petImage = view.findViewById(R.id.civPetImg);
@@ -75,8 +80,10 @@ public class Home extends Fragment {
         reference = FirebaseDatabase.getInstance().getReference().child("Users").
                 child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser())
                         .getEmail())));
+        reference1 = FirebaseDatabase.getInstance().getReference().child("Pets");
+
         readFireBase();
-        setPetImage();
+        readFireBasePet();
         setGraph();
 //
 //        ArrayList<BarEntry> food = new ArrayList<>();
@@ -103,6 +110,53 @@ public class Home extends Fragment {
 
     }
 
+    private void readFireBasePet() {
+        pets = new ArrayList<>();
+
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                pets.clear();
+                for (DataSnapshot ds : dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).getChildren()) {
+                    if (ds.exists()) {
+                        pets.add(Objects.requireNonNull(ds.child("id").getValue()).toString());
+                    }
+                }
+                Log.d(TAG, String.valueOf(pets));
+
+                currentPet = dataSnapshot.child("Current Pet").getValue(String.class);
+                if (pets.size() > 0) {
+                    Log.d(TAG, currentPet);
+                    if (currentPet != null) {
+                        PetInfo petInfo = dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).child(pets.get(Integer.parseInt(currentPet))).getValue(PetInfo.class);
+                        if (petInfo != null) {
+                            if (isAdded()) {
+                                petName.setText(petInfo.getName());
+                                Glide.with(getContext())
+                                        .load(petInfo.getImageID())
+                                        .into(petImage);
+                            }
+                        } else {
+                            PetInfo petInfoTemp = new PetInfo();
+                            petName.setText(petInfoTemp.getName());
+                        }
+                    }
+                } else {
+                    reference1.child("Current Pet").setValue("0");
+                    {
+                        PetInfo petInfoTemp = new PetInfo();
+                        petName.setText(petInfoTemp.getName());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+
     private void readFireBase() {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,11 +167,11 @@ public class Home extends Fragment {
                 String container = (String) dataSnapshot.child("Food Status").child("container").getValue();
 
                 if (petInfo != null) {
-                    pet_Name.setText(petInfo.getName());
+                    petName.setText(petInfo.getName());
 
                 } else {
                     PetInfo petInfoTemp = new PetInfo();
-                    pet_Name.setText(petInfoTemp.getName());
+                    petName.setText(petInfoTemp.getName());
                 }
                 if (swTimer != null) {
                     if (swTimer.equals("true")) {
@@ -171,16 +225,6 @@ public class Home extends Fragment {
 
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
-    }
-
-    private void setPetImage() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .into(petImage);
-        }
     }
 
     private void setGraph() {

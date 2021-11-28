@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -60,7 +61,7 @@ public class EditPetProfile extends AppCompatActivity {
         Intent intent = getIntent();
         isNew = intent.getStringExtra("new");
         id = intent.getStringExtra("id");
-        Log.d(TAG,isNew + " " + id);
+        Log.d(TAG, isNew + " " + id);
 
         setVariables();
 
@@ -69,17 +70,22 @@ public class EditPetProfile extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail())));
         reference1 = FirebaseDatabase.getInstance().getReference().child("Pets").child("Current Pet");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-//        if (user.getPhotoUrl() != null) {
-//            Glide.with(this)
-//                    .load(user.getPhotoUrl())
-//                    .into(petImage);
-//        }
         petImage.setOnClickListener(view -> addPetImage());
         confirm.setOnClickListener(view -> updateProfile());
     }
 
+    //Set Variables
+    private void setVariables() {
+        petImage = findViewById(R.id.civPetImg);
+        name = findViewById(R.id.etPet_Name);
+        type = findViewById(R.id.etPet_Type);
+        breed = findViewById(R.id.etPet_Breed);
+        gender = findViewById(R.id.etPet_Gender);
+        weight = findViewById(R.id.etPet_Weight);
+        confirm = findViewById(R.id.fabConfirm_Edit);
+    }
+
+    //Confirm Details For Upload
     private Boolean check() {
         if (updateName.isEmpty() || updateType.isEmpty() || updateBreed.isEmpty() || updateGender.isEmpty() || updateWeight.isEmpty()) {
             makeText(this, "Enter all Details", Toast.LENGTH_SHORT).show();
@@ -100,35 +106,22 @@ public class EditPetProfile extends AppCompatActivity {
         if (check()) {
             PetInfo petInfo = new PetInfo(updateName, updateType, updateBreed, updateGender, updateWeight, id, imageId);
 
-            saveDateFireBase(petInfo);
+            saveDataFireBase(petInfo);
             Intent intent = new Intent(EditPetProfile.this, PetProfile.class);
             startActivity(intent);
             finish();
         }
     }
 
-    private void setVariables() {
-        petImage = findViewById(R.id.civPetImg);
-        name = findViewById(R.id.etPet_Name);
-        type = findViewById(R.id.etPet_Type);
-        breed = findViewById(R.id.etPet_Breed);
-        gender = findViewById(R.id.etPet_Gender);
-        weight = findViewById(R.id.etPet_Weight);
-        confirm = findViewById(R.id.fabConfirm_Edit);
-    }
-
-    private void saveDateFireBase(PetInfo petInfo) {
-        if(isNew.equals("true"))
+    private void saveDataFireBase(PetInfo petInfo) {
+        if (isNew.equals("true"))
             petInfo.setId(id);
         Log.d(TAG, petInfo.getId());
         reference.child(petInfo.getId()).setValue(petInfo);
         reference1.setValue(id);
     }
 
-    static String encodeUserEmail(String userEmail) {
-        return userEmail.replace(".", ",");
-    }
-
+    //Choose Image Source
     public void addPetImage() {
         String title, message, posButtonTxt, negButtonTxt, neutralButtonTxt;
 
@@ -137,11 +130,10 @@ public class EditPetProfile extends AppCompatActivity {
         posButtonTxt = "Camera";
         negButtonTxt = "Gallery";
         neutralButtonTxt = "Cancel";
-        simpleAlert(title,false, posButtonTxt, negButtonTxt, neutralButtonTxt);
+        simpleAlert(title, false, posButtonTxt, negButtonTxt, neutralButtonTxt);
     }
 
-    public void simpleAlert(String title, boolean cancelable,
-                            String posButtonTxt, String negButtonTxt, String neutralButtonTxt) {
+    public void simpleAlert(String title, boolean cancelable, String posButtonTxt, String negButtonTxt, String neutralButtonTxt) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
 //        builder.setMessage(message);
@@ -162,6 +154,7 @@ public class EditPetProfile extends AppCompatActivity {
         builder.show();
     }
 
+    //Upload Image & Create Url
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -222,5 +215,10 @@ public class EditPetProfile extends AppCompatActivity {
         user.updateProfile(request)
                 .addOnSuccessListener(aVoid -> makeText(this, "Updated succesfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> makeText(this, "Profile image failed...", Toast.LENGTH_SHORT).show());
+    }
+
+    //Replace '.' with ','
+    static String encodeUserEmail(String userEmail) {
+        return userEmail.replace(".", ",");
     }
 }

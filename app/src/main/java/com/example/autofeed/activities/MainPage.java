@@ -1,20 +1,17 @@
 package com.example.autofeed.activities;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.example.autofeed.classes.User;
+import com.example.autofeed.R;
+import com.example.autofeed.adapters.VPAdaptor;
 import com.example.autofeed.fragments.Functions;
 import com.example.autofeed.fragments.Guide;
 import com.example.autofeed.fragments.Home;
 import com.example.autofeed.fragments.Logs;
-import com.example.autofeed.R;
 import com.example.autofeed.fragments.Settings;
-import com.example.autofeed.adapters.VPAdaptor;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -34,10 +31,6 @@ public class MainPage extends AppCompatActivity {
 
 
         setVariables();
-        // setSupportActionBar(toolBar);
-
-        //get name of user for later use
-
 
         vpAdapter = new VPAdaptor(getSupportFragmentManager(), getLifecycle());
         //Add Fragments
