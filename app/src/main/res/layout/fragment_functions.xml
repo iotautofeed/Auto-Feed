@@ -8,11 +8,13 @@
     android:padding="10dp"
     android:background="@drawable/background1"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    tools:context=".fragments.Settings">
+    tools:context=".fragments.Settings"
+    android:id="@+id/functions">
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="433dp"
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal">
@@ -25,11 +27,10 @@
             android:clickable="false"
             android:focusable="false"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="10dp"
-            >
+            app:cardCornerRadius="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -49,6 +50,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+                <View
+                    android:id="@+id/view8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.368" />
+
                 <TextView
                     android:id="@+id/tvPortion"
                     android:layout_width="94dp"
@@ -60,10 +73,10 @@
                     android:textSize="15sp"
                     app:layout_constraintBottom_toTopOf="@+id/view7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.061"
+                    app:layout_constraintHorizontal_bias="0.057"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:layout_constraintVertical_bias="0.612" />
+                    app:layout_constraintVertical_bias="0.765" />
 
                 <Spinner
                     android:id="@+id/spinner1"
@@ -71,15 +84,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginTop="36dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="right"
                     app:layout_constraintBottom_toTopOf="@+id/view7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.963"
-                    app:layout_constraintStart_toEndOf="@+id/tvPortion"
-                    app:layout_constraintTop_toBottomOf="@+id/switchButton"
-                    app:layout_constraintVertical_bias="0.27" />
+                    app:layout_constraintHorizontal_bias="0.994"
+                    app:layout_constraintStart_toEndOf="@+id/tvPortion" />
 
                 <View
                     android:id="@+id/view7"
@@ -91,131 +102,25 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.402" />
+                    app:layout_constraintVertical_bias="0.577" />
 
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="28dp"
-                    android:text="Start at"
+                    android:layout_marginTop="64dp"
+                    android:text="Set Time"
                     android:textColor="@color/black"
                     android:textSize="17sp"
-                    app:layout_constraintBottom_toTopOf="@+id/view6"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.056"
+                    app:layout_constraintHorizontal_bias="0.055"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPortion" />
 
-                <TextView
-                    android:id="@+id/tvFeed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:text="Feed every"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toTopOf="@+id/view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.056"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTime"
-                    app:layout_constraintVertical_bias="0.651" />
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="20dp"
-                    android:textOff="OFF"
-                    android:textOn="ON"
-                    android:saveEnabled="true"
-                    android:textSize="15sp"
-                    android:thumb="@drawable/sw_thumb"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:showText="true"
-                    app:track="@drawable/sw_track" />
-
-
-                <View
-                    android:id="@+id/view6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/lightGray"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7"
-                    app:layout_constraintVertical_bias="0.324" />
-
-                <TextView
+                    <TextView
                     android:id="@+id/tvSetTime"
-                    android:layout_width="160dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="20dp"
-                    android:gravity="center"
-                    android:text="set time"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toTopOf="@+id/view6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/tvTime"
-                    app:layout_constraintTop_toBottomOf="@+id/switchButton"
-                    app:layout_constraintVertical_bias="0.871" />
-
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="40dp"
-                    android:gravity="right"
-                    app:layout_constraintBottom_toTopOf="@+id/view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.889"
-                    app:layout_constraintStart_toEndOf="@+id/tvFeed"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSetTime" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/lightGray"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view6"
-                    app:layout_constraintVertical_bias="0.505" />
-
-                <TextView
-                    android:id="@+id/tvTime1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="End at"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.077"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view"
-                    app:layout_constraintVertical_bias="0.418" />
-
-                <TextView
-                    android:id="@+id/tvSetTime1"
                     android:layout_width="160dp"
                     android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
@@ -226,12 +131,61 @@
                     android:text="set time"
                     android:textColor="@color/black"
                     android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/btnAddSchedule"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/tvTime1"
-                    app:layout_constraintTop_toBottomOf="@+id/view"
-                    app:layout_constraintVertical_bias="0.703" />
+                    app:layout_constraintStart_toEndOf="@+id/tvTime" />
+
+                <Button
+                    android:id="@+id/btnAddSchedule"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Add to schedule"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/btnOpenSchedule"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginStart="20dp"
+                    android:text="open schedule"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.061"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/cage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Dog House "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:layout_constraintVertical_bias="0.575" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:gravity="right"
+                    app:layout_constraintBottom_toTopOf="@+id/view7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.989"
+                    app:layout_constraintStart_toEndOf="@+id/tvPortion" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -316,47 +270,4 @@
 
     </LinearLayout>
 
-    <!--LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv5"
-            android:layout_width="340dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circle_background_green"
-                    android:src="@drawable/ic_outline_pets_24">
-
-                </ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Pet Info"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-    </LinearLayout-->
 </LinearLayout>

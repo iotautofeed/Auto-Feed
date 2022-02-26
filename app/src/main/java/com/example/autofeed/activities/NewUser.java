@@ -9,28 +9,24 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.autofeed.R;
 import com.example.autofeed.classes.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Objects;
 
 public class NewUser extends AppCompatActivity {
 
     private static final String TAG = "NewUser";
 
-    private FirebaseAuth auth;          //authentication
-    private FirebaseDatabase rootNode;  //real time database
-    private DatabaseReference reference;
+    private FirebaseAuth auth;          // define variable for FireBase authentication
+    private DatabaseReference reference;// define variable for access realtime database
 
-    //Define var
-    private EditText userName, userEmail, userPassword, confirmPassword;
-    private Button confirmBtn;
+
+    private EditText userName, userEmail, userPassword, confirmPassword; // define variables for text input
+    private Button confirmBtn;                                           // define variable for button
 
 
     @Override
@@ -38,26 +34,104 @@ public class NewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
+        auth = FirebaseAuth.getInstance();                                    // get access for FireBase authentication
+        reference = FirebaseDatabase.getInstance().getReference("Users");// access branch in realtime database "Users"
 
-        auth = FirebaseAuth.getInstance();
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Users");
+        setVariables(); // execute function for linking the UI to the code
 
-        setVariables();
-
-
-        confirmBtn.setOnClickListener(view -> checkEmail());
+        confirmBtn.setOnClickListener(view -> credentials()); // if confirmBtn was pressed execute credentials() function
 
     }
 
-    private void setVariables() {
-        userName = findViewById(R.id.etName);
-        userEmail = findViewById(R.id.etEmail);
-        userPassword = findViewById(R.id.etPassword);
-        confirmPassword = findViewById(R.id.etConfirmPassword);
-        confirmBtn = findViewById(R.id.btnConfirm);
+    private void setVariables() {                              //function for linking the UI to the code
+        userName = findViewById(R.id.etName);                  //
+        userEmail = findViewById(R.id.etEmail);                //
+        userPassword = findViewById(R.id.etPassword);          //
+        confirmPassword = findViewById(R.id.etConfirmPassword);//
+        confirmBtn = findViewById(R.id.btnConfirm);            //
 
     }
+
+    public void credentials() {
+        String user_name = userName.getText().toString().trim();        //variable to hold the user's name
+        String user_mail = userEmail.getText().toString().trim();       //variable to hold the user's email
+        String user_password = userPassword.getText().toString().trim();//variable to hold the user's password
+
+        if (user_mail.isEmpty() && user_password.isEmpty()) {           //check for missing credentials and alert the user
+            makeText(NewUser.this, "Enter all missing details", Toast.LENGTH_SHORT).show();
+        } else if (user_password.isEmpty())
+            makeText(NewUser.this, "Enter Email", Toast.LENGTH_SHORT).show();
+        else if (user_mail.isEmpty())
+            makeText(NewUser.this, "Enter Password", Toast.LENGTH_SHORT).show();
+        else {
+            auth.fetchSignInMethodsForEmail(user_mail).addOnCompleteListener(task -> {//if all credentials filled create check if email exist
+                //Log.d(TAG, "" + task.getResult().getSignInMethods().size());
+                if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).size() == 0) {// if email is not in the database then create new user
+                    makeText(NewUser.this, "New user", Toast.LENGTH_SHORT).show(); // pop up message for success creating new user
+                    setUser(user_mail, user_password, user_name);// execute a function to create user credentials in FireBase
+                } else {
+                    makeText(NewUser.this, "Existed user", Toast.LENGTH_SHORT).show(); //email already exist, send  pop up message to the user
+                }
+            });
+        }
+    }
+
+
+    //
+    public void setUser(String user_mail, String user_password, String user_name) {                      // function for creating new user
+        //upload to FireBase
+        auth.createUserWithEmailAndPassword(user_mail, user_password)                                    // creating new user in FireBase Authentication
+                .addOnCompleteListener(this, task ->
+                {
+                    if (task.isSuccessful()) {                                                           // if succeeded to Create new user
+                        Log.d(TAG, "Registration successful");
+                        makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();// pop up message for success registration
+                        saveDateFireBase(user_mail, user_password, user_name);                            // execute a function for saving user credentials in realtime database
+
+
+                        startActivity(new Intent(getApplicationContext(), Login.class)//send the user back to the Login activity
+                                .putExtra("ActivityKey", 1));
+                        Log.d(TAG, "After startActivity");
+                        finish(); // finish current activity
+                    } else {
+                        Log.d(TAG, "Registration failed");
+                        makeText(this, "Registration failed", Toast.LENGTH_SHORT).show(); // pop up message for failed registration
+                    }
+                });
+    }
+
+    private void saveDateFireBase(String email, String password, String name) { // function for storing user credentials in realtime database
+
+        User user = new User(email, password, name); //create a class to store  user credentials
+        reference.child(Objects.requireNonNull((encodeUserEmail(email)))).child("User Info").setValue(user); //uploading  user credentials to firebase
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Login.class));
+        finish();
+    }
+
+    static String encodeUserEmail(String userEmail) {
+        return userEmail.replace(".", ",");
+    }
+}
+
+
+//auth.getCurrentUid();
+
+//    public Boolean chekPassword() {
+//        String user_password = userPassword.getText().toString().trim();
+//        String confirmPass = confirmPassword.getText().toString().trim();
+//
+//        if (user_password.length() < 21 && userPassword.length() > 5) {
+//            if (user_password.equals(confirmPass)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 //    public void checkUser() {
 //        String user_name = userName.getText().toString().trim();
@@ -130,84 +204,4 @@ public class NewUser extends AppCompatActivity {
 //            userPassword.setError(null);
 //            return true;
 //        }
-//    }
-
-    private void saveDateFireBase(String email, String password, String name) {
-
-        User user = new User(email, password, name);
-        reference.child(Objects.requireNonNull((encodeUserEmail(email)))).child("User Info").setValue(user);
-    }
-
-//
-    public void setUser(String user_mail, String user_password, String user_name) {
-        //upload to FireBase
-        auth.createUserWithEmailAndPassword(user_mail, user_password)
-                .addOnCompleteListener(this, task ->
-                {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "Registration successful");
-                        makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        saveDateFireBase(user_mail, user_password, user_name);
-
-
-                        startActivity(new Intent(getApplicationContext(), Login.class)
-                                .putExtra("ActivityKey", 1));
-                        Log.d(TAG, "After startActivity");
-                        finish();
-                    } else {
-                        Log.d(TAG, "Registration failed");
-                        makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    public void checkEmail() {
-        String user_name = userName.getText().toString().trim();
-        String user_mail = userEmail.getText().toString().trim();
-        String user_password = userPassword.getText().toString().trim();
-
-        if (user_mail.isEmpty() && user_password.isEmpty()) {
-            makeText(NewUser.this, "Enter all missing details", Toast.LENGTH_SHORT).show();
-        } else if (user_password.isEmpty())
-            makeText(NewUser.this, "Enter Email", Toast.LENGTH_SHORT).show();
-        else if (user_mail.isEmpty())
-            makeText(NewUser.this, "Enter Password", Toast.LENGTH_SHORT).show();
-        else {
-            auth.fetchSignInMethodsForEmail(user_mail).addOnCompleteListener(task -> {
-                //Log.d(TAG, "" + task.getResult().getSignInMethods().size());
-                if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).size() == 0) {
-                    makeText(NewUser.this, "New user", Toast.LENGTH_SHORT).show();
-                    setUser(user_mail, user_password, user_name);
-                } else {
-                    makeText(NewUser.this, "Existed user", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this, Login.class));
-        finish();
-    }
-
-    static String encodeUserEmail(String userEmail) {
-        return userEmail.replace(".", ",");
-    }
-}
-
-
-//auth.getCurrentUid();
-
-//    public Boolean chekPassword() {
-//        String user_password = userPassword.getText().toString().trim();
-//        String confirmPass = confirmPassword.getText().toString().trim();
-//
-//        if (user_password.length() < 21 && userPassword.length() > 5) {
-//            if (user_password.equals(confirmPass)) {
-//                return true;
-//            }
-//        }
-//        return false;
 //    }

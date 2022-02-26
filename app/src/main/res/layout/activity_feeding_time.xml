@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".activities.FeedingTime">
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow android:background="@color/teal_700">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Time"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Portion"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Repeat"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/tvFeedTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="-- : --"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPortion1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:saveEnabled="true"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="15sp"
+                android:thumb="@drawable/sw_thumb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="true"
+                app:track="@drawable/sw_track" />
+
+
+        </TableRow>
+
+        <TableRow android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/tvFeedTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="-- : --"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPortion2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:saveEnabled="true"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="15sp"
+                android:thumb="@drawable/sw_thumb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="true"
+                app:track="@drawable/sw_track" />
+
+
+        </TableRow>
+
+        <TableRow android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/tvFeedTime3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="-- : --"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPortion3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:saveEnabled="true"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="15sp"
+                android:thumb="@drawable/sw_thumb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="true"
+                app:track="@drawable/sw_track" />
+
+
+        </TableRow>
+
+        <TableRow android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/tvFeedTime4"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="-- : --"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPortion4"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:padding="10dp"
+                android:saveEnabled="true"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="15sp"
+                android:thumb="@drawable/sw_thumb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="true"
+                app:track="@drawable/sw_track" />
+
+
+        </TableRow>
+    </TableLayout>
+
+
+    <Button
+        android:id="@+id/btnSelectPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="48dp"
+        android:text="Select"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnDeleteSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="48dp"
+        android:text="Remove"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_marginBottom="28dp"
+        android:text="Current dog house : "
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSelectPet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

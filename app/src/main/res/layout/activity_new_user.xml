@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.AutoFeed"
     android:background="@color/white"
-    tools:context=".activities.NewUser"
-    >
+    tools:context=".activities.NewUser">
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -26,16 +26,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHighlight="#00FFFFFF"
-            />
+            android:textColorHighlight="#00FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -52,12 +52,14 @@
         app:layout_constraintTop_toBottomOf="@id/textInputEditText1"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -78,6 +80,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputEditText2"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -86,6 +89,7 @@
             android:maxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText4"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -104,6 +108,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputEditText3"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
@@ -112,6 +117,7 @@
             android:maxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- button layout design -->
     <Button
         android:id="@+id/btnConfirm"
         android:layout_width="250dp"

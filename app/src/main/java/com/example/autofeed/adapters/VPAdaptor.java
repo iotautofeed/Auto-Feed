@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class VPAdaptor extends FragmentStateAdapter {
 
-ArrayList<Fragment>arrayList = new ArrayList<>();
+    ArrayList<Fragment> arrayList = new ArrayList<>();
+
     public VPAdaptor(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -35,5 +36,8 @@ ArrayList<Fragment>arrayList = new ArrayList<>();
     public int getItemCount() {
         return arrayList.size();
     }
-    public void addFragment(@NonNull Fragment fragment){arrayList.add(fragment);}
+
+    public void addFragment(@NonNull Fragment fragment) {
+        arrayList.add(fragment);
+    }
 }

@@ -7,6 +7,7 @@
     android:background="@drawable/background1"
     tools:context=".activities.PetProfile">
 
+    <!-- floating action button menu that contain multiple floating action buttons -->
     <com.github.sealstudios.fab.FloatingActionMenu
         android:id="@+id/fabMenu"
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         app:menu_labels_singleLine="false"
         app:menu_openDirection="left">
 
-
+        <!-- floating action button design -->
         <com.github.sealstudios.fab.FloatingActionButton
             android:id="@+id/fabChangePet"
             android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
 
         </com.github.sealstudios.fab.FloatingActionButton>
 
+        <!-- floating action button design -->
         <com.github.sealstudios.fab.FloatingActionButton
             android:id="@+id/fabEditPet"
             android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
 
         </com.github.sealstudios.fab.FloatingActionButton>
 
+        <!-- floating action button design -->
         <com.github.sealstudios.fab.FloatingActionButton
             android:id="@+id/fabAddPet"
             android:layout_width="wrap_content"
@@ -69,7 +72,7 @@
         </com.github.sealstudios.fab.FloatingActionButton>
     </com.github.sealstudios.fab.FloatingActionMenu>
 
-
+    <!-- circle image view design -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civPetImg"
         android:layout_width="160dp"
@@ -85,6 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- constraint layout-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="325dp"
@@ -96,6 +100,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.631">
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvPetName"
             android:layout_width="wrap_content"
@@ -111,6 +116,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- separation line design -->
         <View
             android:id="@+id/view1"
             android:layout_width="300dp"
@@ -122,13 +128,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvPet_Type"
             android:layout_width="90dp"
             android:layout_height="29dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Pet Type"
+            android:text="Animal"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -136,6 +143,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view1"
             app:layout_constraintVertical_bias="0.062" />
 
+        <!-- separation line design -->
         <View
             android:id="@+id/view2"
             android:layout_width="300dp"
@@ -149,6 +157,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPet_Type"
             app:layout_constraintVertical_bias="0.033" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvPet_Breed"
             android:layout_width="80dp"
@@ -163,6 +172,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view2"
             app:layout_constraintVertical_bias="0.059" />
 
+        <!-- separation line design -->
         <View
             android:id="@+id/view3"
             android:layout_width="300dp"
@@ -176,6 +186,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPet_Breed"
             app:layout_constraintVertical_bias="0.108" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvPet_Gender"
             android:layout_width="80dp"
@@ -190,6 +201,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view3"
             app:layout_constraintVertical_bias="0.054" />
 
+        <!-- separation line design -->
         <View
             android:id="@+id/view4"
             android:layout_width="300dp"
@@ -203,6 +215,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPet_Gender"
             app:layout_constraintVertical_bias="0.141" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvPet_Weight"
             android:layout_width="80dp"
@@ -217,6 +230,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view4"
             app:layout_constraintVertical_bias="0.0" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvEdit_Pet_Type"
             android:layout_width="199dp"
@@ -234,6 +248,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view1"
             app:layout_constraintVertical_bias="0.064" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvEdit_Pet_Breed"
             android:layout_width="210dp"
@@ -247,6 +262,7 @@
             app:layout_constraintBottom_toTopOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvEdit_Pet_Gender"
             android:layout_width="210dp"
@@ -261,6 +277,7 @@
             app:layout_constraintHorizontal_bias="0.756"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- textview design -->
         <TextView
             android:id="@+id/tvEdit_Pet_Weight"
             android:layout_width="210dp"

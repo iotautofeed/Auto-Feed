@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".activities.Login">
 
-
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,15 +27,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHighlight="#00FFFFFF"
-            android:inputType="text"
-            />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -55,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputEditText1"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -63,6 +65,7 @@
             android:maxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- button layout design -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="180dp"
@@ -79,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputEditText2"
         app:layout_constraintVertical_bias="0.165" />
 
-
+    <!-- text layout design -->
     <TextView
         android:id="@+id/tvNewuser"
         android:layout_width="wrap_content"

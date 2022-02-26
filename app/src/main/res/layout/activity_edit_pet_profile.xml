@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.EditPetProfile">
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -23,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPet_Name"
             android:layout_width="match_parent"
@@ -32,7 +34,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -41,7 +43,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
-        android:hint="Type"
+        android:hint="Animal"
         android:maxLines="1"
         app:endIconMode="clear_text"
         app:boxStrokeColor="@color/lightBlue"
@@ -50,6 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputEditText1">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPet_Type"
             android:layout_width="match_parent"
@@ -58,6 +61,7 @@
             android:textColorHighlight="#00FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -75,6 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputEditText2">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPet_Breed"
             android:layout_width="match_parent"
@@ -83,6 +88,7 @@
             android:textColorHighlight="#00FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText4"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -100,6 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputEditText3">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPet_Gender"
             android:layout_width="match_parent"
@@ -108,6 +115,7 @@
             android:textColorHighlight="#00FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- text field layout design -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEditText5"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -125,6 +133,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputEditText4">
 
+        <!-- text input  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPet_Weight"
             android:layout_width="match_parent"
@@ -133,6 +142,7 @@
             android:textColorHighlight="#00FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- floating action button for details conformation-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabConfirm_Edit"
         android:layout_width="wrap_content"
@@ -150,6 +160,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- circle image for pet image -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civPetImg"
         android:layout_width="150dp"
