@@ -8,6 +8,7 @@
     android:background="@drawable/background"
     tools:context=".activities.MainPage">
 
+    <!-- tab layout design -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

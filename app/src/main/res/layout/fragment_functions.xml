@@ -11,7 +11,7 @@
     tools:context=".fragments.Settings"
     android:id="@+id/functions">
 
-
+    <!-- create LinearLayout -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="433dp"
@@ -19,6 +19,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- create card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSet_Time"
             android:layout_width="match_parent"
@@ -29,12 +30,13 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp">
 
+            <!-- create constraintlayout in the card -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
+                <!-- textview design  -->
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
@@ -49,7 +51,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
+                <!-- separation line design -->
                 <View
                     android:id="@+id/view8"
                     android:layout_width="match_parent"
@@ -62,6 +64,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.368" />
 
+                <!-- textview design  -->
                 <TextView
                     android:id="@+id/tvPortion"
                     android:layout_width="94dp"
@@ -78,6 +81,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
                     app:layout_constraintVertical_bias="0.765" />
 
+                <!-- spinner design -->
                 <Spinner
                     android:id="@+id/spinner1"
                     android:layout_width="wrap_content"
@@ -92,6 +96,7 @@
                     app:layout_constraintHorizontal_bias="0.994"
                     app:layout_constraintStart_toEndOf="@+id/tvPortion" />
 
+                <!-- separation line design -->
                 <View
                     android:id="@+id/view7"
                     android:layout_width="match_parent"
@@ -104,6 +109,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.577" />
 
+                <!-- textview design  -->
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
@@ -118,7 +124,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPortion" />
 
-
+                <!-- textview design  -->
                     <TextView
                     android:id="@+id/tvSetTime"
                     android:layout_width="160dp"
@@ -136,6 +142,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/tvTime" />
 
+                <!-- button layout design -->
                 <Button
                     android:id="@+id/btnAddSchedule"
                     android:layout_width="100dp"
@@ -147,6 +154,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- button layout design -->
                 <Button
                     android:id="@+id/btnOpenSchedule"
                     android:layout_width="100dp"
@@ -160,6 +168,7 @@
                     app:layout_constraintHorizontal_bias="0.061"
                     app:layout_constraintStart_toStartOf="parent" />
 
+                <!-- textview design  -->
                 <TextView
                     android:id="@+id/cage"
                     android:layout_width="wrap_content"
@@ -173,6 +182,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
                     app:layout_constraintVertical_bias="0.575" />
 
+                <!-- spinner design -->
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="wrap_content"
@@ -189,10 +199,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
-
     </LinearLayout>
 
+    <!-- LinearLayout design  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,6 +209,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- card design  -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cvFeed_Now"
             android:layout_width="match_parent"
@@ -211,12 +221,13 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp">
 
+            <!-- RelativeLayout design in card  -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
+                <!-- textview design  -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,6 +239,7 @@
                     android:textSize="21sp"
                     android:textStyle="bold" />
 
+                <!-- textview design  -->
                 <TextView
                     android:layout_width="94dp"
                     android:layout_height="wrap_content"
@@ -241,6 +253,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
+                <!-- spinner design  -->
                 <Spinner
                     android:id="@+id/spinner3"
                     android:layout_width="160dp"
@@ -252,6 +265,7 @@
                     android:layout_marginBottom="86dp"
                     android:gravity="right" />
 
+                <!-- button layout design -->
                 <Button
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
@@ -266,8 +280,5 @@
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
-
     </LinearLayout>
-
 </LinearLayout>

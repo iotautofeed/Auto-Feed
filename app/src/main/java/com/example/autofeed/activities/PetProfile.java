@@ -1,7 +1,6 @@
 package com.example.autofeed.activities;
 
 import static android.widget.Toast.makeText;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import com.example.autofeed.classes.PetInfo;
 import com.github.sealstudios.fab.FloatingActionButton;
 import com.github.sealstudios.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,8 +46,6 @@ public class PetProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_pet_profile);
-//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-//        Objects.requireNonNull(getSupportActionBar()).hide();
 
         setVariables();  // function for variables setup
 
@@ -57,7 +53,6 @@ public class PetProfile extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child("Pets");// access branch in realtime database "Users"
 
         readFireBase();//execute function that read data from FireBase
-        //setPetImage();
 
         addPet.setOnClickListener(view -> editDetails());       // if addPet button was pressed execute editDetails() function
         editPet.setOnClickListener(view -> editDetails());      // if editPet button was pressed execute editDetails() function
@@ -105,33 +100,7 @@ public class PetProfile extends AppCompatActivity {
     private void setPetProfile(int changePet) {                                 // function for setup pet's profile
         reference.child("Current Pet").setValue(String.valueOf(changePet));     // set the data at this location to the given value
         readFireBase();                                                         // execute function that read data from FireBase
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                PetInfo petInfo = snapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).child(String.valueOf(changePet)).getValue(PetInfo.class);
-//                if (petInfo != null) {
-//                    editName.setText(petInfo.getName());
-//                    editType.setText(petInfo.getType());
-//                    editBreed.setText(petInfo.getBreed());
-//                    editGender.setText(petInfo.getGender());
-//                    editWeight.setText(petInfo.getWeight() + " kgs");
-//                    Glide.with(PetProfile.this)
-//                            .load(petInfo.getImageID())
-//                            .into(petImage);
-//                } else {
-//                    PetInfo petInfoTemp = new PetInfo();
-//                    editName.setText(petInfoTemp.getName());
-//                    editType.setText(petInfoTemp.getType());
-//                    editBreed.setText(petInfoTemp.getBreed());
-//                    editGender.setText(petInfoTemp.getGender());
-//                    editWeight.setText(petInfoTemp.getWeight() + " kgs");
-//                }
-//            }
 
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
     }
 
     private void setImage() {                                                  // function for set up pet image
@@ -184,8 +153,13 @@ public class PetProfile extends AppCompatActivity {
                 if (pets.size() > 0) { //if there pets
                     Log.d(TAG, currentPet);
                     if (currentPet != null) { // if the user have a pet
-                        PetInfo petInfo = dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()) //  create a new class that store the credentials
-                                .getEmail()))).child(pets.get(Integer.parseInt(currentPet))).getValue(PetInfo.class);                             //  of the current pet
+                        PetInfo petInfo = dataSnapshot
+                                .child(encodeUserEmail(Objects.requireNonNull    //
+                                (Objects.requireNonNull(auth.getCurrentUser())   //  create a new class that store the credentials
+                                .getEmail())))                                   //  of the current pet
+                                .child(pets.get(Integer.parseInt(currentPet)))   //
+                                .getValue(PetInfo.class);                        //
+
                         if (petInfo != null) {                               // if petInfo is not empty
                             editName.setText(petInfo.getName());             // set pet's name on screen
                             editType.setText(petInfo.getType());             // set pet's type on screen
@@ -235,17 +209,5 @@ public class PetProfile extends AppCompatActivity {
     //Replace '.' with ','
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart");
     }
 }

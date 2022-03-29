@@ -1,9 +1,7 @@
 package com.example.autofeed.activities;
 
 import static android.widget.Toast.makeText;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -65,7 +63,7 @@ public class NewUser extends AppCompatActivity {
             makeText(NewUser.this, "Enter Password", Toast.LENGTH_SHORT).show();
         else {
             auth.fetchSignInMethodsForEmail(user_mail).addOnCompleteListener(task -> {//if all credentials filled create check if email exist
-                //Log.d(TAG, "" + task.getResult().getSignInMethods().size());
+
                 if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).size() == 0) {// if email is not in the database then create new user
                     makeText(NewUser.this, "New user", Toast.LENGTH_SHORT).show(); // pop up message for success creating new user
                     setUser(user_mail, user_password, user_name);// execute a function to create user credentials in FireBase
@@ -77,7 +75,6 @@ public class NewUser extends AppCompatActivity {
     }
 
 
-    //
     public void setUser(String user_mail, String user_password, String user_name) {                      // function for creating new user
         //upload to FireBase
         auth.createUserWithEmailAndPassword(user_mail, user_password)                                    // creating new user in FireBase Authentication
@@ -107,13 +104,13 @@ public class NewUser extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {                                   // on back press return to login activity
         super.onBackPressed();
         startActivity(new Intent(this, Login.class));
         finish();
     }
 
-    static String encodeUserEmail(String userEmail) {
+    static String encodeUserEmail(String userEmail) {  // function that replace '.' with ',' in the user's email
         return userEmail.replace(".", ",");
     }
 }

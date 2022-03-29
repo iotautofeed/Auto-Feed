@@ -1,9 +1,10 @@
 package com.example.autofeed.classes;
 
 public class PetInfo {
-    private String name, type, breed, gender, weight, id, imageID;
+    private String name, type, breed, gender, weight, id, imageID; // set class variables
 
-    public PetInfo(String name, String type, String breed, String gender, String weight, String id, String imageID) {
+    public PetInfo(String name, String type, String breed,         //create constructor
+                   String gender, String weight, String id, String imageID) {
         this.name = name;
         this.type = type;
         this.breed = breed;
@@ -13,7 +14,7 @@ public class PetInfo {
         this.imageID = imageID;
     }
 
-    public PetInfo() {
+    public PetInfo() { //create default constructor
         this.setName("Name");
         this.setType("Type");
         this.setBreed("Breed");
@@ -24,6 +25,7 @@ public class PetInfo {
 
     }
 
+    // create getters and setters
     public String getName() {
         return name;
     }

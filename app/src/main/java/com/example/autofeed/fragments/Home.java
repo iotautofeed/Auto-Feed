@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.autofeed.R;
-import com.example.autofeed.activities.PetProfile;
 import com.example.autofeed.classes.PetInfo;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -24,13 +23,11 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,11 +70,12 @@ public class Home extends Fragment {
         bowlStatus = view.findViewById(R.id.tvBowlStatus);          //
         containerStatus = view.findViewById(R.id.tvContainerStatus);//
 
-        auth = FirebaseAuth.getInstance();                                                                               // get access for FireBase authentication
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").                                        // access branch : "Users/ (current user email) in realtime database
-                child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail())));//
+        auth = FirebaseAuth.getInstance();                                          // get access for FireBase authentication
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").   // access branch : "Users/ (current user email) in realtime database
+                child(encodeUserEmail(Objects.requireNonNull                        //
+                (Objects.requireNonNull(auth.getCurrentUser()).getEmail())));       //
 
-        reference1 = FirebaseDatabase.getInstance().getReference().child("Pets");/// access branch : "Pets"  in realtime database
+        reference1 = FirebaseDatabase.getInstance().getReference().child("Pets"); // access branch : "Pets"  in realtime database
 
 
         progressBar.setMax(max);   //set max range of progressbar to 100
@@ -87,27 +85,7 @@ public class Home extends Fragment {
 
         readFireBase();   //execute function that read data from FireBase
         readFireBasePet();//execute function that read data from FireBase
-        setGraph();       //execute function that read data from FireBase
-//
-//        ArrayList<BarEntry> food = new ArrayList<>();
-//        food.add(new BarEntry(1, 100));
-//        food.add(new BarEntry(2, 200));
-//        food.add(new BarEntry(3, 300));
-//        food.add(new BarEntry(4, 400));
-//        food.add(new BarEntry(5, 300));
-//        food.add(new BarEntry(6, 250));
-
-//        barDataSet = new BarDataSet(food, "Food");
-//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-//        barDataSet.setValueTextColor(Color.BLACK);
-//        barDataSet.setValueTextSize(14f);
-//
-//        barData = new BarData(barDataSet);
-//
-//        barChart.setFitBars(true);
-//        barChart.setData(barData);
-//        barChart.getDescription().setText("Bar Chart");
-//        barChart.animateY(1000);
+        setGraph();       //execute function that read data from FireBaseD
 
         return view;
 
@@ -119,7 +97,8 @@ public class Home extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 pets.clear();// clear the list's data
-                for (DataSnapshot ds : dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).getChildren()) {// get all pets id of the current user
+                for (DataSnapshot ds : dataSnapshot.child(encodeUserEmail(Objects.requireNonNull    //
+                        (Objects.requireNonNull(auth.getCurrentUser()).getEmail()))).getChildren()) { // get all pets id of the current user
                     if (ds.exists()) {                                                         //if there pets add their id to pets variable
                         pets.add(Objects.requireNonNull(ds.child("id").getValue()).toString());//
                     }
@@ -130,8 +109,9 @@ public class Home extends Fragment {
                 if (pets.size() > 0) { //if there pets
                     Log.d(TAG, currentPet);
                     if (currentPet != null) { // if the user have a pet
-                        PetInfo petInfo = dataSnapshot.child(encodeUserEmail(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()))) // create a new class that store the data
-                                .child(pets.get(Integer.parseInt(currentPet))).getValue(PetInfo.class);                                                         // of the current pet
+                        PetInfo petInfo = dataSnapshot.child(encodeUserEmail(Objects.requireNonNull
+                                (Objects.requireNonNull(auth.getCurrentUser()).getEmail())))           // create a new class that store the data
+                                .child(pets.get(Integer.parseInt(currentPet))).getValue(PetInfo.class); // of the current pet
                         if (petInfo != null) {                     // if petInfo is not empty
                             if (isAdded()) {                       //
                                 petName.setText(petInfo.getName());// set pet name on screen
@@ -159,15 +139,18 @@ public class Home extends Fragment {
         });
     }
 
-
     private void readFireBase() { // function that read data from firebase
         reference.addValueEventListener(new ValueEventListener() { // listen to the branch reference is set and retrieve data from it
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                PetInfo petInfo = dataSnapshot.child("Pet Info").getValue(PetInfo.class);                   // create variable
-                String swTimer = (String) dataSnapshot.child(("Feed Time")).child("Timer").getValue();      // create variable
-                String bowl = (String) dataSnapshot.child("Food Status").child("bowl").getValue();          // create variable that hold the amount of food in the bowl
-                String container = (String) dataSnapshot.child("Food Status").child("container").getValue();// create variable that hold the amount of food in the container
+                PetInfo petInfo = dataSnapshot.child("Pet Info")
+                                 .getValue(PetInfo.class);                   // create variable
+                String swTimer = (String) dataSnapshot.child(("Feed Time"))
+                        .child("Timer").getValue();                          // create variable
+                String bowl = (String) dataSnapshot.child("Food Status")
+                        .child("bowl").getValue();                           // create variable that hold the amount of food in the bowl
+                String container = (String) dataSnapshot
+                        .child("Food Status").child("container").getValue();// create variable that hold the amount of food in the container
 
                 if (petInfo != null) {
                     petName.setText(petInfo.getName());
@@ -176,12 +159,12 @@ public class Home extends Fragment {
                     PetInfo petInfoTemp = new PetInfo();
                     petName.setText(petInfoTemp.getName());
                 }
-                if (swTimer != null) {                                                                     // if the timer is not null
-                    if (swTimer.equals("true")) {                                                          // if the timer is not null
-                        Calendar cal = Calendar.getInstance();                                             // create a variable that hold the current time
-                        nextFeedTime.setText(new SimpleDateFormat("hh : mm").format(cal.getTime()));//
+                if (swTimer != null) {                          // if the timer is not null
+                    if (swTimer.equals("true")) {               // if the timer is not null
+                        Calendar cal = Calendar.getInstance();   // create a variable that hold the current time
+                        nextFeedTime.setText(new SimpleDateFormat("hh : mm").format(cal.getTime()));
                     } else
-                        nextFeedTime.setText("-- : --");                                                   //
+                        nextFeedTime.setText("-- : --");
                 }
                 if (bowl != null) {                                          // if bowl is not empty
                     bowlStatus.setText(bowl + "%");                          // set percentage of current food in the bowl as text
@@ -209,27 +192,33 @@ public class Home extends Fragment {
         });
     }
 
-    private void setProgressBarColor(int percentage, ProgressBar progress) {               // function that color the progress bar with respect to the percentage
-        LayerDrawable progressBarDrawable = (LayerDrawable) progress.getProgressDrawable();// create a variable that hold an array of drawables.
-                                                                                           // These are drawn in array order, so the element with the largest index will be drawn on top.
-        Drawable backgroundDrawable = progressBarDrawable.getDrawable(0);            // set background color at index 0 of progressBarDrawable
-        Drawable progressDrawable = progressBarDrawable.getDrawable(1);              // set progress color at index 0 of progressBarDrawable
-        backgroundDrawable.setColorFilter(ContextCompat.getColor(this.requireContext(), R.color.white), PorterDuff.Mode.SRC_IN); // set background color to white
+    private void setProgressBarColor(int percentage, ProgressBar progress) { // function that color the progress bar with respect to the percentage
+        LayerDrawable progressBarDrawable =                                  //  create a variable that hold an array of drawables.
+                (LayerDrawable) progress.getProgressDrawable();              // These are drawn in array order, so the element
+                                                                             // with the largest index will be drawn on top.
+
+        Drawable backgroundDrawable = progressBarDrawable.getDrawable(0);  // set background color at index 0 of progressBarDrawable
+        Drawable progressDrawable = progressBarDrawable.getDrawable(1);  // set progress color at index 0 of progressBarDrawable
+        backgroundDrawable.setColorFilter(ContextCompat.
+                getColor(this.requireContext(), R.color.white), PorterDuff.Mode.SRC_IN); // set background color to white
 
         // set color of progress bar with respect to percentage
         if (percentage > 75) {
-            progressDrawable.setColorFilter(ContextCompat.getColor(this.getContext(), R.color.green), PorterDuff.Mode.SRC_IN);                   //set progress color to green
+            progressDrawable.setColorFilter(ContextCompat.getColor          //set progress color to green
+                    (this.getContext(), R.color.green), PorterDuff.Mode.SRC_IN);
         } else if (percentage > 50) {
-            progressDrawable.setColorFilter(ContextCompat.getColor(this.getContext(), R.color.lightGreen), PorterDuff.Mode.SRC_IN);              //set progress color to light green
+            progressDrawable.setColorFilter(ContextCompat.getColor           //set progress color to light green
+                    (this.getContext(), R.color.lightGreen), PorterDuff.Mode.SRC_IN);
         } else if (percentage > 25) {
-            progressDrawable.setColorFilter(ContextCompat.getColor(this.getContext(), android.R.color.holo_orange_dark), PorterDuff.Mode.SRC_IN);//set progress color to orange
+            progressDrawable.setColorFilter(ContextCompat.getColor         //set progress color to orange
+                    (this.getContext(), android.R.color.holo_orange_dark), PorterDuff.Mode.SRC_IN);
         } else {
-            progressDrawable.setColorFilter(ContextCompat.getColor(this.getContext(), R.color.red), PorterDuff.Mode.SRC_IN);                     //set progress color to red
+            progressDrawable.setColorFilter(ContextCompat.getColor        //set progress color to red
+                    (this.getContext(), R.color.red), PorterDuff.Mode.SRC_IN);
         }
     }
 
     private void setGraph() {      //function that plot the amount of food the pet ate per day
-
 
         List<String> list = new ArrayList<>(); // create a dynamic list of strings variable
         DatabaseReference graphReference = FirebaseDatabase.getInstance().getReference().child("FoodPerDay"); // access branch in realtime database "FoodPerDay"
@@ -246,6 +235,7 @@ public class Home extends Fragment {
 
                         }
                     }
+
                 }
                 ArrayList<BarEntry> data = new ArrayList<>(); // create a dynamic list of BarEntry(x and y coordinates) variable
 
@@ -262,8 +252,9 @@ public class Home extends Fragment {
                 barData = new BarData(barDataSet);
 
                 barChart.setFitBars(true); // set the fit shape of the bars
-                barChart.setData(barData); //sets a new data object for the chart. The data object contains all values and information needed for displaying.
-                barChart.getDescription().setText("Bar Chart");//
+                barChart.setData(barData); //sets a new data object for the chart. The data object contains all
+                                            // values and information needed for displaying.
+                barChart.getDescription().setText("Bar Chart");
                 barChart.animateY(1000); // set animation on the y - axis that last 1 second
             }
 

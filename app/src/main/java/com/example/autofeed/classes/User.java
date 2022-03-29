@@ -1,20 +1,20 @@
 package com.example.autofeed.classes;
 
 public class User {
-    private String email, password, name;
+    private String email, password, name;// set class variables
 
-    public User(String email, String password, String name) {
+    public User(String email, String password, String name) { //create constructor
         this.email = email;
         this.password = password;
         this.name = name;
     }
 
-    public User() {
+    public User() { // create default constructor
         this.setEmail("example@gmail.com");
         this.setPassword("**************");
         this.setName("Name");
     }
-
+    // create getters and setters
     public String getName() {
         return name;
     }

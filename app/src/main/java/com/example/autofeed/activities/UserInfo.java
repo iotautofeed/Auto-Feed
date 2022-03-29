@@ -62,6 +62,7 @@ public class UserInfo extends AppCompatActivity {
         });
     }
 
+    //Replace '.' with ','
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
     }

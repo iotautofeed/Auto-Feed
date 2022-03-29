@@ -1,10 +1,9 @@
 package com.example.autofeed.classes;
 
 public class FeedTime {
-    private String hour, minute;
+    private String hour, minute; // set class variables
 
-
-    public FeedTime() {
+    public FeedTime() { //create constructor
         this.setHour("0");
         this.setMinute("0");
     }
@@ -14,6 +13,7 @@ public class FeedTime {
         this.minute = minute;
     }
 
+    // create getters and setters
     public String getHour() {
         return hour;
     }
